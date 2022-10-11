@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Employee List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Add new employee
+            </a>
+        </div>
+    </div>
+    <br />
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Employee Number
+            </th>
+            <th>
+                Names
+            </th>
+            <th>
+                Date of birth
+            </th>
+            <th>
+                Salary
+            </th>
+            <th>
+                Role
+            </th>
+            <th>
+                Manager Names
+            </th>
+            <th>
+                
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model) 
+        {
+            <tr>
+                <td width="10%">
+                    @obj.EmployeeNumber
+                </td>
+                <td width="20%">
+                    @obj.FirstName @obj.OtherNames @obj.Surname
+                </td>
+                <td width="10%">
+                    @obj.BirthDate.ToShortDateString()
+                </td>
+                <td width="10%">
+                    @obj.Salary
+                </td>
+                <td width="15%">
+                    @obj.Role
+                </td>
+                <td>
+                @obj.ManagerNames
+                </td>
+                <td>
+                    <div class=" btn-group" role="group">
+                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@obj.EmployeeNumber"
+                           class="btn btn-primary mx-2"> <i class="bi bi-pen"></i> &nbsp; Edit</a>
+                    </div>
+                    <div class="btn-group" role="group">
+                            <a asp-controller="Employee" asp-action="Delete" asp-route-id="@obj.EmployeeNumber"
+                           class="btn btn-danger mx-2"> <i class="bi bi-trash"></i> &nbsp; Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
