@@ -1,7 +1,7 @@
-﻿using EmployeeManagementWeb.Models;
+﻿using EmployeeManagement.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeManagementWeb.Data
+namespace EmployeeManagement.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {

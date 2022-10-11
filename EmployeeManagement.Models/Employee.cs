@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace EmployeeManagementWeb.Models
+namespace EmployeeManagement.Models
 {
     public class Employee
     {
@@ -13,7 +12,7 @@ namespace EmployeeManagementWeb.Models
         public string FirstName { get; set; }
         [DisplayName("Other names")]
         public string? OtherNames { get; set; }
-        [Required]       
+        [Required]
         public string Surname { get; set; }
         [Required]
         [DisplayName("Date of birth")]

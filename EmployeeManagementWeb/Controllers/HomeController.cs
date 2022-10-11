@@ -1,4 +1,4 @@
-﻿using EmployeeManagementWeb.Models;
+﻿using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

@@ -1,5 +1,5 @@
-﻿using EmployeeManagementWeb.Data;
-using EmployeeManagementWeb.Models;
+﻿using EmployeeManagement.DataAccess;
+using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
