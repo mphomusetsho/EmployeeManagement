@@ -10,14 +10,16 @@ namespace EmployeeManagement.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
+        public IEmployeeRepository Employee { get; private set; }
+        public IEmployeeLevelRepository EmployeeLevel { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Employee = new EmployeeRepository(_db);
+            EmployeeLevel = new EmployeeLevelRepository(_db);
         }
-        public IEmployeeRepository Employee { get; private set; }   
-
+        
         public void Save()
         {
             _db.SaveChanges();
