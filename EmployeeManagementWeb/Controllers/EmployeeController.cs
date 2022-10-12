@@ -8,19 +8,19 @@ namespace EmployeeManagementWeb.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly IEmployeeRepository _db;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly String highestRole = "ceo";
 
-        public EmployeeController(IEmployeeRepository db)
+        public EmployeeController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;   
         }
 
         //Displays the list of employee
         //GET
         public IActionResult Index()
         {
-            IEnumerable<Employee> objEmployeeList = _db.GetAll();
+            IEnumerable<Employee> objEmployeeList = _unitOfWork.Employee.GetAll();
             return View(objEmployeeList);
         }
 
@@ -49,8 +49,8 @@ namespace EmployeeManagementWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Add(obj);
-                _db.Save();
+                _unitOfWork.Employee.Add(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Employee added successfully.";
                 return RedirectToAction("Index");
             }
@@ -70,7 +70,7 @@ namespace EmployeeManagementWeb.Controllers
             }
 
             //var employee = _db.Employees.Find(id);
-            var employee = _db.GetFirstOrDefault(x => x.EmployeeNumber == id);
+            var employee = _unitOfWork.Employee.GetFirstOrDefault(x => x.EmployeeNumber == id);
 
             if (employee == null)
             {
@@ -97,8 +97,8 @@ namespace EmployeeManagementWeb.Controllers
 
             if (ModelState.IsValid && obj.EmployeeNumber != 0)
             {
-                _db.Update(obj);
-                _db.Save();
+                _unitOfWork.Employee.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Employee updated successfully.";
                 return RedirectToAction("Index");
             }
@@ -115,7 +115,7 @@ namespace EmployeeManagementWeb.Controllers
             }
 
             //var employee = _db.Employees.Find(id);
-            var employee = _db.GetFirstOrDefault(x => x.EmployeeNumber == id);
+            var employee = _unitOfWork.Employee.GetFirstOrDefault(x => x.EmployeeNumber == id);
 
             if (employee == null)
             {
@@ -134,8 +134,8 @@ namespace EmployeeManagementWeb.Controllers
                 return NotFound();
             }
 
-            _db.Remove(obj);
-            _db.Save();
+            _unitOfWork.Employee.Remove(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Employee deleted successfully.";
 
             return RedirectToAction("Index");            

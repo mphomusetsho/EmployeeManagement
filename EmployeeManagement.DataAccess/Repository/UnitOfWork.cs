@@ -1,5 +1,4 @@
 ﻿using EmployeeManagement.DataAccess.Repository.IRepository;
-using EmployeeManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +7,20 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.DataAccess.Repository
 {
-    public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
 
-        public EmployeeRepository(ApplicationDbContext db): base(db)
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            Employee = new EmployeeRepository(_db);
         }
+        public IEmployeeRepository Employee { get; private set; }   
 
-        public void Update(Employee obj)
+        public void Save()
         {
-            _db.Employees.Update(obj);
+            _db.SaveChanges();
         }
     }
 }
