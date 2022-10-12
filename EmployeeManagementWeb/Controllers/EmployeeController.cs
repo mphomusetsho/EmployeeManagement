@@ -68,8 +68,8 @@ namespace EmployeeManagementWeb.Controllers
                 return NotFound();
             }
 
-            var employee = _db.Employees.Find(id);
-            //var employee = _db.Employees.SingleOrDefault(x => x.EmployeeNumber == empNum);
+            //var employee = _db.Employees.Find(id);
+            var employee = _db.Employees.FirstOrDefault(x => x.EmployeeNumber == id);
 
             if (employee == null)
             {
