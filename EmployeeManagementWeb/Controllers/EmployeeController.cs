@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.DataAccess;
+using EmployeeManagement.DataAccess.Repository.IRepository;
 using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -7,10 +8,10 @@ namespace EmployeeManagementWeb.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IEmployeeRepository _db;
         private readonly String highestRole = "ceo";
 
-        public EmployeeController(ApplicationDbContext db)
+        public EmployeeController(IEmployeeRepository db)
         {
             _db = db;
         }
@@ -19,7 +20,7 @@ namespace EmployeeManagementWeb.Controllers
         //GET
         public IActionResult Index()
         {
-            IEnumerable<Employee> objEmployeeList = _db.Employees;
+            IEnumerable<Employee> objEmployeeList = _db.GetAll();
             return View(objEmployeeList);
         }
 
@@ -48,8 +49,8 @@ namespace EmployeeManagementWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Employees.Add(obj);
-                _db.SaveChanges();
+                _db.Add(obj);
+                _db.Save();
                 TempData["success"] = "Employee added successfully.";
                 return RedirectToAction("Index");
             }
@@ -69,7 +70,7 @@ namespace EmployeeManagementWeb.Controllers
             }
 
             //var employee = _db.Employees.Find(id);
-            var employee = _db.Employees.FirstOrDefault(x => x.EmployeeNumber == id);
+            var employee = _db.GetFirstOrDefault(x => x.EmployeeNumber == id);
 
             if (employee == null)
             {
@@ -96,8 +97,8 @@ namespace EmployeeManagementWeb.Controllers
 
             if (ModelState.IsValid && obj.EmployeeNumber != 0)
             {
-                _db.Employees.Update(obj);
-                _db.SaveChanges();
+                _db.Update(obj);
+                _db.Save();
                 TempData["success"] = "Employee updated successfully.";
                 return RedirectToAction("Index");
             }
@@ -113,8 +114,8 @@ namespace EmployeeManagementWeb.Controllers
                 return NotFound();
             }
 
-            var employee = _db.Employees.Find(id);
-            //var employee = _db.Employees.SingleOrDefault(x => x.EmployeeNumber == empNum);
+            //var employee = _db.Employees.Find(id);
+            var employee = _db.GetFirstOrDefault(x => x.EmployeeNumber == id);
 
             if (employee == null)
             {
@@ -133,8 +134,8 @@ namespace EmployeeManagementWeb.Controllers
                 return NotFound();
             }
 
-            _db.Employees.Remove(obj);
-            _db.SaveChanges();
+            _db.Remove(obj);
+            _db.Save();
             TempData["success"] = "Employee deleted successfully.";
 
             return RedirectToAction("Index");            
