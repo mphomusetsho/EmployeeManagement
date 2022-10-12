@@ -1,0 +1,56 @@
+﻿@model IEnumerable<EmployeeLevel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Employee levels List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="EmployeeLevel" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Add new employee level
+            </a>
+        </div>
+    </div>
+    <br />
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Level Description
+            </th>
+            <th>
+                
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model) 
+        {
+            <tr>
+                <td width="10%">
+                    @obj.Id
+                </td>
+                <td width="60%">
+                    @obj.LevelDescr
+                </td>
+                <td>
+                    <div class=" btn-group" role="group">
+                        <a asp-controller="EmployeeLevel" asp-action="Edit" asp-route-id="@obj.Id"
+                           class="btn btn-primary mx-2"> <i class="bi bi-pen"></i> &nbsp; Edit</a>
+                    </div>
+                    <div class="btn-group" role="group">
+                            <a asp-controller="EmployeeLevel" asp-action="Delete" asp-route-id="@obj.Id"
+                           class="btn btn-danger mx-2"> <i class="bi bi-trash"></i> &nbsp; Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

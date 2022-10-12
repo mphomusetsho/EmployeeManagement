@@ -21,6 +21,8 @@ namespace EmployeeManagement.Models
         [Range(1000, 1000000)]
         public int Salary { get; set; }
         [Required]
+        public string Level { get; set; }
+        [Required]
         public string Role { get; set; }
         [DisplayName("Manager names")]
         public string? ManagerNames { get; set; }

@@ -27,6 +27,13 @@
             <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
         <div class="mb-3">
+            <label asp-for="Level"></label>
+            <select asp-for="Level" asp-items="@(ViewData["list"] as IEnumerable<SelectListItem>)" class="form-select">
+                <option disabled selected>---Select employee level---</option>
+            </select>
+            <span asp-validation-for="Level" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
             <label asp-for="Salary"></label>
             <input asp-for="Salary" class="form-control" />
             <span asp-validation-for="Salary" class="text-danger"></span>

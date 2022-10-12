@@ -1,8 +1,11 @@
 ﻿using EmployeeManagement.DataAccess;
+using EmployeeManagement.DataAccess.Repository;
 using EmployeeManagement.DataAccess.Repository.IRepository;
 using EmployeeManagement.Models;
+using EmployeeManagement.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EmployeeManagementWeb.Controllers;
 [Area("Admin")]
@@ -28,6 +31,22 @@ public class EmployeeController : Controller
     //GET
     public IActionResult Create()
     {
+        IEnumerable<SelectListItem> levelsList = _unitOfWork.EmployeeLevel.GetAll().
+            Select(x => new SelectListItem
+            {
+                Text = x.LevelDescr
+            });
+        ViewData["list"] = levelsList;
+        //EmployeeLevelViewModel employeeLevelVM = new()
+        //{
+        //    EmployeeLevel = new(),
+        //    EmployeeLevelsList = _unitOfWork.EmployeeLevel.GetAll().
+        //    Select(x => new SelectListItem
+        //    {
+        //        Text = x.LevelDescr
+        //    })
+        //};
+
         return View();
     }
 
@@ -64,6 +83,13 @@ public class EmployeeController : Controller
 
     public IActionResult Edit(int? id)
     {
+        IEnumerable<SelectListItem> levelsList = _unitOfWork.EmployeeLevel.GetAll().
+            Select(x => new SelectListItem
+            {
+                Text = x.LevelDescr
+            });
+        ViewData["list"] = levelsList;
+
         if (id == null || id == 0)
         {
             return NotFound();

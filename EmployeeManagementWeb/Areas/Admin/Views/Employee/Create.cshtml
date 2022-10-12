@@ -32,8 +32,15 @@
         <div class="mb-3">
             <label asp-for="Role"></label>
             @*<select asp-for="Role" class="form-control" asp-items="Model.Roles"></select>*@
-            <input asp-for="Role" class="form-control dropdown form-select" />
+            <input asp-for="Role" class="form-control dropdown" />
             <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Level"></label>
+            <select asp-for="Level" asp-items="@(ViewData["list"] as IEnumerable<SelectListItem>)" class="form-select">
+                <option disabled selected>---Select employee level---</option>
+            </select>
+            <span asp-validation-for="Level" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="ManagerNames"></label>
