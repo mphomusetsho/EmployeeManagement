@@ -19,8 +19,6 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        //IEnumerable<Employee> objEmployeeList = _unitOfWork.Employee.GetAll();
-        //return View(objEmployeeList);
         return View();
     }
 

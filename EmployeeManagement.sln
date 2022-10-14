@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementWeb", "EmployeeManagementWeb\EmployeeManagementWeb.csproj", "{06F5040A-591C-499F-B6E9-BAFA82CEA4E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.DataAccess", "EmployeeManagement.DataAccess\EmployeeManagement.DataAccess.csproj", "{46BDC326-EA0D-4534-9C31-A0CC72A433D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.DataAccess", "EmployeeManagement.DataAccess\EmployeeManagement.DataAccess.csproj", "{46BDC326-EA0D-4534-9C31-A0CC72A433D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Models", "EmployeeManagement.Models\EmployeeManagement.Models.csproj", "{DFA7D4A5-2FD2-4AD9-A64E-F89604B7FBB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Models", "EmployeeManagement.Models\EmployeeManagement.Models.csproj", "{DFA7D4A5-2FD2-4AD9-A64E-F89604B7FBB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Utility", "EmployeeManagement.Utility\EmployeeManagement.Utility.csproj", "{89C92AF7-23EB-4114-A6AD-D1C15E9BA75F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Utility", "EmployeeManagement.Utility\EmployeeManagement.Utility.csproj", "{89C92AF7-23EB-4114-A6AD-D1C15E9BA75F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

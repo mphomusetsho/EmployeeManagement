@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Employee>
+
+<br />
+<div class="col-6">
+    <h2 class="text-primary">Employee Report List</h2>
+</div>
+<br />
+
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.EmployeeNumber).Titled("Employee ID");
+    columns.Add(model => model.FirstName).Titled("First name");
+    columns.Add(model => model.OtherNames).Titled("Other names");
+    columns.Add(model => model.Surname).Titled("Surname");
+    columns.Add(model => model.BirthDate).Titled("Date of birth");
+    columns.Add(model => model.Role).Titled("Role");
+    columns.Add(model => model.Level).Titled("Level");
+    columns.Add(model => model.Salary).Titled("Salary");
+    columns.Add(model => model.ManagerNames).Titled("Manager names");
+
+}).Filterable().Sortable().Pageable()
+    );
+
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll(".mvc-grid").forEach(element => new MvcGrid(element));
+    </script>
+}

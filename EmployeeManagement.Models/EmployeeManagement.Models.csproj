@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Grid.Mvc" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="NonFactors.Grid.Mvc6" Version="7.0.2" />
   </ItemGroup>
 
 </Project>
