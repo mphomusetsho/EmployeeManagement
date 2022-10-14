@@ -26,6 +26,8 @@ namespace EmployeeManagement.Models
         public string Role { get; set; }
         [DisplayName("Manager names")]
         public string? ManagerNames { get; set; }
+        [DisplayName("ManagerID")]
+        public int? ManagerID { get; set; }
 
         //public List<SelectListItem> Roles { get; } = new List<SelectListItem>
         //{

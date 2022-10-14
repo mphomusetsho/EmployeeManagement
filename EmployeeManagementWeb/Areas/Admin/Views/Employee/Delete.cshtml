@@ -40,6 +40,10 @@
             <label asp-for="ManagerNames"></label>
             <input asp-for="ManagerNames" class="form-control" disabled />
         </div>
+        <div class="mb-3">
+            <label asp-for="ManagerID"></label>
+            <input asp-for="ManagerID" class="form-control" disabled />
+        </div>
 
         <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
         <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary" style="width:150px">
