@@ -47,6 +47,16 @@ $("#btnOrgChart").on('click', function (e) {
 		
 
 		var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+
+		function selectHandler() {
+			var selectedItem = chart.getSelection()[0];
+			if (selectedItem) {
+				var selectedId = data.getValue(selectedItem.row, 0);
+				alert('The user selected ' + topping);
+			}
+		}
+
+		google.visualization.events.addListener(chart, 'select', selectHandler);
 		chart.draw(data, { allowHtml: true });
 	}
 
