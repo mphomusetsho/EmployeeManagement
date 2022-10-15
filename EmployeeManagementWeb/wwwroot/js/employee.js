@@ -1,43 +1,60 @@
-﻿var dataTable;
+﻿google.load("visualization", "1", { packages: ["orgchart"] });
+var data; var repo;
 
-$(document).ready(function () {
-    loadDataTable();
+$("#btnOrgChart").on('click', function (e) {
+
+	$.ajax({
+		type: "POST",
+		url: "/Employee/Home/GetData",
+		data: '{}',		
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		success: OnSuccess_getOrgData,
+		error: OnErrorCall_getOrgData
+	});
+
+	function OnSuccess_getOrgData(repo) {
+		data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Manager');
+		data.addColumn('string', 'ToolTip');
+
+		var rep = new Object(repo);
+		for (var cur in rep) {
+			console.log(rep[1].employeeNumber);
+        }
+	
+		for (var i = 0; i < repo.length; i++) {
+			row = repo[i];
+			var empID = repo[i].employeeNumber.toString();
+			var empName = repo[i].firstName;
+			
+			if (repo[i].managerID == null) {
+				var mgrID = "";
+			} else {
+				var mgrID = repo[i].managerID.toString();
+			}
+
+			var designation = repo[i].role;
+
+			// For each orgchart box, provide the name, manager, and tooltip to show.
+			data.addRows([[{
+				v: empID,
+				f: empName + '<div style="color:red">' + designation + '</div>'
+			}, mgrID, designation]]);
+			
+		}
+		
+
+		var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+		chart.draw(data, { allowHtml: true });
+	}
+
+	function OnErrorCall_getOrgData() {
+		console.log("Whoops something went wrong :( ");
+	}
+	e.preventDefault();
 });
 
-function loadDataTable() {
-    dataTable = $('#tblData').DataTable({
-        "ajax": {
-            "url": "/Employee/Home/GetAll"
-        },
-        "columns": [
-            { "data": "employeeNumber", "width": "5%" },
-            { "data": "firstName", "width": "5%" },
-            { "data": "otherNames", "width": "10%" },
-            { "data": "surname", "width": "10%" },
-            { "data": "birthDate", "width": "10%" },
-            { "data": "salary", "width": "5%" },
-            { "data": "level", "width": "5%" },
-            { "data": "role", "width": "10%" },
-            { "data": "managerNames", "width": "10%" },
-            {
-                "data": "employeeNumber",
-                "render": function (data) {
-                    return `
-                        <div class=" btn-group" role="group">
-                        <a href="/Admin/Employee/Edit?id=${data}"
-                           class="btn btn-primary mx-2"> <i class="bi bi-pen"></i> &nbsp; Edit</a>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <a href="/Admin/Employee/Delete?id=${data}"
-                           class="btn btn-danger mx-2"> <i class="bi bi-trash"></i> &nbsp; Delete</a>
-                        </div>
-                        `
-                }, 
-                "width": "20%"
-                
-            }
-        ]
-    });
-}
 
 
