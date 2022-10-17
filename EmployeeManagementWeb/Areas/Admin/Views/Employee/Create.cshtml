@@ -11,10 +11,6 @@
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="OtherNames"></label>
-            <input asp-for="OtherNames" class="form-control"/>
-        </div>
-        <div class="mb-3">
             <label asp-for="Surname"></label>
             <input asp-for="Surname" class="form-control"/>
             <span asp-validation-for="Surname" class="text-danger"></span>
@@ -35,13 +31,7 @@
             <input asp-for="Role" class="form-control dropdown" />
             <span asp-validation-for="Role" class="text-danger"></span>
         </div>
-        <div class="mb-3">
-            <label asp-for="Level"></label>
-            <select asp-for="Level" asp-items="@(ViewData["list"] as IEnumerable<SelectListItem>)" class="form-select">
-                <option disabled selected>---Select employee level---</option>
-            </select>
-            <span asp-validation-for="Level" class="text-danger"></span>
-        </div>
+       </div>
         <div class="mb-3">
             <label asp-for="ManagerNames"></label>
             <input asp-for="ManagerNames" class="form-control" />

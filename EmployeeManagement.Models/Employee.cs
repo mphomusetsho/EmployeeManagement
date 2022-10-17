@@ -10,8 +10,7 @@ namespace EmployeeManagement.Models
         [Required]
         [DisplayName("First name")]
         public string FirstName { get; set; }
-        [DisplayName("Other names")]
-        public string? OtherNames { get; set; }
+      
         [Required]
         public string Surname { get; set; }
         [Required]
@@ -19,9 +18,7 @@ namespace EmployeeManagement.Models
         public DateTime BirthDate { get; set; }
         [Required]
         [Range(1000, 1000000)]
-        public int Salary { get; set; }
-        [Required]
-        public string Level { get; set; }
+        public int Salary { get; set; }    
         [Required]
         public string Role { get; set; }
         [DisplayName("Manager names")]

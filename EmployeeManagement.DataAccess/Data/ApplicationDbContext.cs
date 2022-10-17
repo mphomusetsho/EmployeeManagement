@@ -11,6 +11,6 @@ namespace EmployeeManagement.DataAccess
         }
 
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmployeeLevel> Levels { get; set; }
+     
     }
 }

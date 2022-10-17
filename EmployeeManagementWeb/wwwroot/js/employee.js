@@ -1,5 +1,5 @@
 ﻿google.load("visualization", "1", { packages: ["orgchart"] });
-var data; var repo;
+var data; var repo; var selectedId; var btnEdit;
 
 $("#btnOrgChart").on('click', function (e) {
 
@@ -19,11 +19,6 @@ $("#btnOrgChart").on('click', function (e) {
 		data.addColumn('string', 'Manager');
 		data.addColumn('string', 'ToolTip');
 
-		var rep = new Object(repo);
-		for (var cur in rep) {
-			console.log(rep[1].employeeNumber);
-        }
-	
 		for (var i = 0; i < repo.length; i++) {
 			row = repo[i];
 			var empID = repo[i].employeeNumber.toString();
@@ -51,9 +46,17 @@ $("#btnOrgChart").on('click', function (e) {
 		function selectHandler() {
 			var selectedItem = chart.getSelection()[0];
 			if (selectedItem) {
-				var selectedId = data.getValue(selectedItem.row, 0);
-				alert('The user selected ' + topping);
+				selectedId = data.getValue(selectedItem.row, 0);
+				displayButtons();
+				
 			}
+		}
+
+		function displayButtons() {
+			var x = document.getElementById('searchEditBtns');
+			if (x.style.visibility === 'hidden') {
+				x.style.visibility = 'visible';
+			} 	
 		}
 
 		google.visualization.events.addListener(chart, 'select', selectHandler);
@@ -64,7 +67,12 @@ $("#btnOrgChart").on('click', function (e) {
 		console.log("Whoops something went wrong :( ");
 	}
 	e.preventDefault();
+
+	
 });
+
+
+
 
 
 

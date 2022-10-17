@@ -13,10 +13,6 @@
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="OtherNames"></label>
-            <input asp-for="OtherNames" class="form-control" />
-        </div>
-        <div class="mb-3">
             <label asp-for="Surname"></label>
             <input asp-for="Surname" class="form-control" />
             <span asp-validation-for="Surname" class="text-danger"></span>
@@ -25,13 +21,6 @@
             <label asp-for="BirthDate"></label>
             <input asp-for="BirthDate" class="form-control" type="text" id="datepicker" />
             <span asp-validation-for="BirthDate" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Level"></label>
-            <select asp-for="Level" asp-items="@(ViewData["list"] as IEnumerable<SelectListItem>)" class="form-select">
-                <option disabled selected>---Select employee level---</option>
-            </select>
-            <span asp-validation-for="Level" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Salary"></label>

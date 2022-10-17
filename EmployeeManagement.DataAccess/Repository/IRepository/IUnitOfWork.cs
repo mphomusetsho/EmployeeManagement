@@ -9,7 +9,7 @@ namespace EmployeeManagement.DataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         IEmployeeRepository Employee { get; }
-        IEmployeeLevelRepository EmployeeLevel { get; }
+        
         void Save();
     }
 }
