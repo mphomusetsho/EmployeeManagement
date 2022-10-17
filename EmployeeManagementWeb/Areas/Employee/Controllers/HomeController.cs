@@ -1,6 +1,8 @@
 ﻿using EmployeeManagement.DataAccess.Repository;
 using EmployeeManagement.DataAccess.Repository.IRepository;
 using EmployeeManagement.Models;
+using EmployeeManagement.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Data.SqlClient;
@@ -13,6 +15,7 @@ using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace EmployeeManagementWeb.Controllers;
 [Area("Employee")]
+//[Authorize(Roles = SD.Role_Admin + ","+ SD.Role_Employee)]
 public class HomeController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

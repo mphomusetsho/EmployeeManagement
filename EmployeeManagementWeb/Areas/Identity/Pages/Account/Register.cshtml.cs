@@ -110,6 +110,7 @@ namespace EmployeeManagementWeb.Areas.Identity.Pages.Account
             public int EmployeeNumber { get; set; }
             [Required]
             public string Name { get; set; }
+            public string Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
@@ -117,7 +118,7 @@ namespace EmployeeManagementWeb.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
@@ -153,6 +154,15 @@ namespace EmployeeManagementWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    if (Input.Role == null)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Role_Employee);    
+                    } else
+                    {
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+                    }
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

@@ -2,12 +2,15 @@
 using EmployeeManagement.DataAccess.Repository;
 using EmployeeManagement.DataAccess.Repository.IRepository;
 using EmployeeManagement.Models;
+using EmployeeManagement.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EmployeeManagementWeb.Controllers;
 [Area("Admin")]
+[Authorize(Roles = SD.Role_Admin)]
 public class EmployeeController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
