@@ -110,7 +110,7 @@ public class EmployeeController : Controller
         return View(obj);
     }
 
-    //Deletes an employee record
+   // Deletes an employee record
     public IActionResult Delete(int? id)
     {
         if (id == null || id == 0)
@@ -161,5 +161,25 @@ public class EmployeeController : Controller
 
         return age;
     }
+
+    //#region API CALLS
+    //[HttpDelete]
+    //[ValidateAntiForgeryToken]
+    //public IActionResult Delete(int? id)
+    //{
+        
+    //    var obj = _unitOfWork.Employee.GetFirstOrDefault(x => x.EmployeeNumber == id);
+
+    //    if (obj == null)
+    //    {
+    //        return Json ( new {success = false, message = "Error while deleting"});
+    //    }
+
+    //    _unitOfWork.Employee.Remove(obj);
+    //    _unitOfWork.Save();
+    //    return Json(new { success = true, message = "Delete Succesful" });
+
+    //}
+    //#endregion
 }
 
