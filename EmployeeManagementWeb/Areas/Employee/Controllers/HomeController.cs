@@ -20,7 +20,7 @@ using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace EmployeeManagementWeb.Controllers;
 [Area("Employee")]
-//[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
 public class HomeController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
