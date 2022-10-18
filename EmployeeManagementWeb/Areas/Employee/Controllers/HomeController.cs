@@ -1,11 +1,16 @@
-﻿using EmployeeManagement.DataAccess.Repository;
+﻿using EmployeeManagement.DataAccess;
+using EmployeeManagement.DataAccess.Repository;
 using EmployeeManagement.DataAccess.Repository.IRepository;
+using EmployeeManagement.DataAccess.Service;
 using EmployeeManagement.Models;
 using EmployeeManagement.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Configuration;
@@ -15,21 +20,80 @@ using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace EmployeeManagementWeb.Controllers;
 [Area("Employee")]
-//[Authorize(Roles = SD.Role_Admin + ","+ SD.Role_Employee)]
+//[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
 public class HomeController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+    private readonly IUserService _userService;
+    private readonly ApplicationDbContext _db;
+    public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, 
+        IUserService userService, ApplicationDbContext db)
     {
         _logger = logger;
         _unitOfWork = unitOfWork;
+        _userService = userService;
+        _db = db;
     }
 
     public IActionResult Index()
     {
+        var userId = _userService.GetUserId();
+        if (userId == null)
+        {
+            ViewData["UserNotFound"] = "You are not logged in";
+        } else
+        {
+            //var user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Id == userId);
+            var user = _db.ApplicationUsers.FirstOrDefault(x => x.Id == userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var employeeNumber = user.EmployeeNumber;
+            //ViewDetails(employeeNumber);
+            var employee = _unitOfWork.Employee.GetFirstOrDefault(x => x.EmployeeNumber == employeeNumber);
+
+            if (employee == null)
+            {
+                ViewData["EmployeeNotFound"] = "You are not yet registered as an employee";
+            }
+            //else
+            //{
+            //    ViewDetails(employee);
+            //}
+            else
+            {
+                ViewData["EmployeeNumber"] = employee.EmployeeNumber;
+                ViewData["FirstName"] = employee.FirstName;
+                ViewData["Surname"] = employee.Surname;
+                ViewData["DateOfBirth"] = employee.BirthDate;
+                ViewData["Role"] = employee.Role;
+                ViewData["Salary"] = employee.Salary;
+                ViewData["ManagerNames"] = employee.ManagerNames;
+            }
+        }
+        
+
         return View();
+    }
+
+    public IActionResult ViewDetails(Employee employee)
+    {
+        //if (id == null || id == 0)
+        //{
+        //    return NotFound();
+        //}
+
+        //var employee = _db.Employees.Find(id);
+        // employee = _unitOfWork.Employee.GetFirstOrDefault(x => x.EmployeeNumber == id);
+
+        //if (employee == null)
+        //{
+        //    return NotFound();
+        //}
+        return View(employee);
     }
 
     public IActionResult Privacy()

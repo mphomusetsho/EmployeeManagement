@@ -10,8 +10,7 @@ namespace EmployeeManagement.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required]
-        public int EmployeeNumber { get; set; }
+        public int? EmployeeNumber { get; set; }
         [Required]
         public string Name { get; set; }
         

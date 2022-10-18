@@ -1,6 +1,8 @@
 using EmployeeManagement.DataAccess;
 using EmployeeManagement.DataAccess.Repository;
 using EmployeeManagement.DataAccess.Repository.IRepository;
+using EmployeeManagement.DataAccess.Service;
+using EmployeeManagement.Models;
 using EmployeeManagement.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -17,7 +19,21 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
-builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+//builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+    options.LoginPath = "/Identity/Account/Login";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});
 
 var app = builder.Build();
 

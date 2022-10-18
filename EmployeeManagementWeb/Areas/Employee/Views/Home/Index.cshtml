@@ -1,9 +1,11 @@
-﻿
+﻿@using EmployeeManagement.Utility
+
     <div class="row pt-4">
         <div class="col">
-            <h2 class="text-primary">Employee List</h2>
-        </div>
+            
+            <h2 class="text-bg-danger">@ViewData["EmployeeNotFound"]</h2>
 
+        </div>
         
         <div class="col" style="visibility:hidden" id="searchEditBtns">
         <div class="btn btn-primary mx-2 btn-group" role="group" id="btnEdit">
@@ -18,20 +20,75 @@
             </div>
         </div>
 
-        <div class="col text-end">
+
+    <div>
+        <a onclick="btnDetailsClicked()" id="btnDetails" class="btn btn-primary">
+            <i class="bi bi-eye"></i> &nbsp; My details
+        </a>
+    </div> 
+    <br />
+    <br />
+        @if(User.IsInRole(SD.Role_Admin)) {
+        <div>
             <a id="btnOrgChart" class="btn btn-primary">
-            <i class="bi bi-border-style"></i> &nbsp; View Hierarchy
+                <i class="bi bi-border-style"></i> &nbsp; View Hierarchy
             </a>
         </div>
-        
-    </div>
-    <br />
-
+        } 
+        <br />
+        <br />
+    
+    <table class="table table-bordered table-striped" id="tblDetails">
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>@Html.Label("Employee Number")</th>
+                <th>@ViewData["EmployeeNumber"]</th>
+            </tr>
+            <tr>
+                <th>@Html.Label("First Name")</th>
+                <th>@ViewData["FirstName"]</th>
+            </tr>
+            <tr>
+                <th>Surname</th>
+                <th>@ViewData["Surname"]</th>
+            </tr>
+            <tr>
+                <th>Date of birth</th>
+                <th>@ViewData["DateOfBirth"]</th>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <th>@ViewData["Role"]</th>
+            </tr>
+            <tr>
+                <th>Salary</th>
+                <th>@ViewData["Salary"]</th>
+            </tr>
+            <tr>
+                <th>Manager names</th>
+                <th>@ViewData["ManagerNames"]</th>
+            </tr>
+        </tbody>
+       
+    </table>
 <div id="chart_div">
     
 </div>
 
 @section Scripts {
     <script src="/js/employee.js"></script>
-   
+   <script>
+            function btnDetailsClicked() {
+                var btn = document.getElementById('tblDetails');
+                if (btn.style == 'hidden') {
+                    btn.style = 'visible';
+                }
+            }
+   </script>
 }

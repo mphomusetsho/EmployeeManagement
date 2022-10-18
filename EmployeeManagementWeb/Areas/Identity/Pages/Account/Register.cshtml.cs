@@ -106,7 +106,7 @@ namespace EmployeeManagementWeb.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
+            [Display(Name = "Employee number")]
             public int EmployeeNumber { get; set; }
             [Required]
             public string Name { get; set; }
@@ -138,6 +138,7 @@ namespace EmployeeManagementWeb.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            var employee = 
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)

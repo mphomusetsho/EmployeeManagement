@@ -2,6 +2,10 @@
 var data; var repo; var selectedId; var btnEdit; var url; var id;
 
 $("#btnOrgChart").on('click', function (e) {
+	var btnDetails = document.getElementById('tblDetails');
+	if (btnDetails.style == 'visible') {
+		btnDetails.style.visibility = 'hidden';
+	}
 
 	$.ajax({
 		type: "POST",
@@ -56,7 +60,7 @@ $("#btnOrgChart").on('click', function (e) {
 
 		function displayButtons() {
 			var x = document.getElementById('searchEditBtns');
-			if (x.style.visibility === 'hidden') {
+			if (x.style.visibility == 'hidden') {
 				x.style.visibility = 'visible';
 				//document.getElementById('btnEdit').onclick = Delete('/Admin/Employee/Delete/' + selectedId);
 

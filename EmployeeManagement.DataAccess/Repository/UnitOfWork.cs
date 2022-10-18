@@ -11,7 +11,8 @@ namespace EmployeeManagement.DataAccess.Repository
     {
         private ApplicationDbContext _db;
         public IEmployeeRepository Employee { get; private set; }
-        
+        public IApplicationUserRepository ApplicationUser { get; private set; }
+
 
         public UnitOfWork(ApplicationDbContext db)
         {
